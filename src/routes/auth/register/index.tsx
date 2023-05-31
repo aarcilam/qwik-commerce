@@ -1,8 +1,7 @@
 import { component$, $ } from '@builder.io/qwik';
-import { DocumentHead, routeLoader$, server$, z } from '@builder.io/qwik-city';
+import { DocumentHead, routeAction$, routeLoader$, server$, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
 import { UserService } from '~/services/UserService';
-const userService = new UserService();
 
 const registerSchema = z.object({
     name: z
@@ -26,17 +25,25 @@ export const useFormLoader = routeLoader$<InitialValues<RegisterForm>>(() => ({
     password: '',
 }));
 
+export const useFormAction = formAction$(async (values:RegisterForm) => {
+    // Runs on server
+    const userService = new UserService();
+    const registerUser = await userService.createUser({...values,createdAt: new Date(),updatedAt: new Date()});
+    console.log(registerUser);
+}, zodForm$(registerSchema));
+   
   
 export default component$(() => {
     const [registerForm, { Form, Field, FieldArray }] = useForm<RegisterForm>({
         loader: useFormLoader(),
+        action: useFormAction(),
         validate: zodForm$(registerSchema),
     });
 
-    const handleSubmit: SubmitHandler<RegisterForm> = server$(async (values, event) => {
+    const handleSubmit: SubmitHandler<RegisterForm> = $((values, event) => {
         // Runs on client
-        const registerUser = await userService.createUser({...values,createdAt: new Date(),updatedAt: new Date()})
-    });
+        console.log(values,event);
+      });
   return (
     <Form onSubmit$={handleSubmit}>
     <Field name="name">
