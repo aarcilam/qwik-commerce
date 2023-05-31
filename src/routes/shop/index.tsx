@@ -9,7 +9,7 @@ export const useGetProducts = routeLoader$(async () => {
 });
 
 export default component$(() => {
-  const products = useResource$(async ({ track }) => {
+  const products = useResource$(async ({ track }):Promise<Product[]> => {
     return await productService.getProducts();
   }); 
   return (
