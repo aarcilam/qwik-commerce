@@ -1,21 +1,12 @@
-import { component$, createContextId, Signal, Slot, useContextProvider, useSignal, useVisibleTask$ } from '@builder.io/qwik';
-
-export const JwtContext = createContextId<Signal<string>>(
-  'docs.jwt-context'
-);
+import { Slot, component$ } from '@builder.io/qwik';
+import { AuthProvider } from '~/context/auth/auth-provider';
 
 export default component$(() => {
-
-  const tokenSignal = useSignal<string>('');
-  useContextProvider(JwtContext, tokenSignal);
-
-  useVisibleTask$(()=>{
-    const token = localStorage.getItem('jwtToken');
-    tokenSignal.value = token? token: '';
-  });
   
-  return <>
-  <h1>authed</h1>
-   <Slot />
-  </>;
+  return (
+  <AuthProvider>
+    <h1>authed</h1>
+    <Slot />
+  </AuthProvider>
+  );
 });

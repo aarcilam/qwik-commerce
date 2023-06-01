@@ -1,6 +1,6 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { DocumentHead, useLocation } from '@builder.io/qwik-city';
-import { JwtContext } from '../../layout';
+import { JwtContext } from '~/context/auth/auth-provider';
 
 export default component$(() => {
     const token = useContext(JwtContext);
