@@ -30,6 +30,7 @@
     "@prisma/client": "4.14.0",
     "@types/bcrypt": "^5.0.0",
     "@types/eslint": "8.37.0",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.1.4",
     "@typescript-eslint/eslint-plugin": "5.59.5",
     "@typescript-eslint/parser": "5.59.5",
@@ -47,6 +48,7 @@
   },
   "dependencies": {
     "@modular-forms/qwik": "^0.17.0",
-    "bcrypt": "^5.1.0"
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.0"
   }
 }
