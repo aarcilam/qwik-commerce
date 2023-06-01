@@ -1,9 +1,12 @@
-import { component$, $, useContext } from '@builder.io/qwik';
+import { component$, $, useContext, useVisibleTask$ } from '@builder.io/qwik';
 import { DocumentHead, routeLoader$, useNavigate, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
+import { User } from '@prisma/client';
 import { ButtonInput } from '~/components/shared/forms/button-input/button-input';
 import { TextInput } from '~/components/shared/forms/text-input/text-input';
 import { JwtContext } from '~/context/auth/auth-provider';
+import { UserService } from '~/services/UserService';
+import { LoggedUsedResponseData } from '../register';
 
 const loginSchema = z.object({
   email: z
@@ -23,12 +26,33 @@ export const useFormLoader = routeLoader$<InitialValues<LoginForm>>(() => ({
   password: '',
 }));
 
-export const useFormAction = formAction$<LoginForm>((values) => {
+export const useFormAction = formAction$<LoginForm,LoggedUsedResponseData>(async (values) => {
   // Runs on server
+  try {
+    const userService = new UserService();
+    const loggedUser:User|null = await userService.getUserByEmail(values.email);
+    if(loggedUser == null) return;
+    const token = userService.createToken(loggedUser.id,loggedUser.email);
+    return {
+        status: 'success',
+        message: 'You are now logged in.',
+        data: {
+            token,
+            user: loggedUser
+        }
+    };
+} catch (error) {
+    return {
+    status: 'error',
+    message: 'error'
+    };
+}
 }, zodForm$(loginSchema));
  
 export default component$(() => {
-  const [loginForm, { Form, Field }] = useForm<LoginForm>({
+  const token = useContext(JwtContext);
+  const nav = useNavigate();
+  const [loginForm, { Form, Field }] = useForm<LoginForm,LoggedUsedResponseData>({
     loader: useFormLoader(),
     action: useFormAction(),
     validate: zodForm$(loginSchema),
@@ -37,6 +61,14 @@ export default component$(() => {
   const handleSubmit: SubmitHandler<LoginForm> = $((values, event) => {
     // Runs on client
   });
+
+  useVisibleTask$(({ track }) => {
+    track(() => loginForm.response);
+    if(!loginForm.response.data) return;
+    if(loginForm.response.status != "success") return 
+    token.value = loginForm.response.data.token;
+    nav('/profile');
+});
   
   return (
     <>

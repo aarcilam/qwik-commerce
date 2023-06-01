@@ -2,7 +2,6 @@ import { component$, $, useVisibleTask$, useSignal, useContext } from '@builder.
 import { DocumentHead, routeLoader$, useNavigate, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
 import { UserService } from '~/services/UserService';
-import * as jwt from 'jsonwebtoken';
 import { User } from '@prisma/client';
 import { TextInput } from '~/components/shared/forms/text-input/text-input';
 import { ButtonInput } from '~/components/shared/forms/button-input/button-input';
@@ -26,7 +25,7 @@ const registerSchema = z.object({
 type RegisterForm = z.infer<typeof registerSchema>;
 
 // Modelo de salida
-type ResponseData = {
+export type LoggedUsedResponseData = {
     token: string,
     user: User
 };
@@ -39,7 +38,7 @@ export const useFormLoader = routeLoader$<InitialValues<RegisterForm>>(() => ({
 }));
 
 // accion usa al enviar el form
-export const useFormAction = formAction$<RegisterForm, ResponseData>(async (values) => {
+export const useFormAction = formAction$<RegisterForm, LoggedUsedResponseData>(async (values) => {
     try {
         const userService = new UserService();
         const registerUser:User = await userService.createUser({
@@ -48,7 +47,7 @@ export const useFormAction = formAction$<RegisterForm, ResponseData>(async (valu
             updatedAt: new Date()
         });
 
-        const token = jwt.sign({id: registerUser.id,email: registerUser.email,},"S3CR3T0");
+        const token = userService.createToken(registerUser.id,registerUser.email);
 
         return {
             status: 'success',
@@ -68,7 +67,8 @@ export const useFormAction = formAction$<RegisterForm, ResponseData>(async (valu
 
 export default component$(() => {
     const token = useContext(JwtContext);
-    const [registerForm, { Form, Field }] = useForm<RegisterForm,ResponseData>({
+    const nav = useNavigate();
+    const [registerForm, { Form, Field }] = useForm<RegisterForm,LoggedUsedResponseData>({
         loader: useFormLoader(),
         action: useFormAction(),
         validate: zodForm$(registerSchema),
@@ -84,7 +84,7 @@ export default component$(() => {
         if(!registerForm.response.data) return;
         if(registerForm.response.status != "success") return 
         token.value = registerForm.response.data.token;
-        console.log("useVisibleTask",token.value);
+        nav('/profile');
     });
 
   return (
