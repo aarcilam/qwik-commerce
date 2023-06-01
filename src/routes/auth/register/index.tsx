@@ -1,4 +1,4 @@
-import { component$, $, useVisibleTask$, useSignal } from '@builder.io/qwik';
+import { component$, $, useVisibleTask$, useSignal, useContext } from '@builder.io/qwik';
 import { DocumentHead, routeLoader$, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
 import { UserService } from '~/services/UserService';
@@ -6,6 +6,7 @@ import * as jwt from 'jsonwebtoken';
 import { User } from '@prisma/client';
 import { TextInput } from '~/components/shared/forms/text-input/text-input';
 import { ButtonInput } from '~/components/shared/forms/button-input/button-input';
+import { JwtContext } from '~/context/auth/auth-provider';
 
 // Objeto Validador
 const registerSchema = z.object({
@@ -66,6 +67,7 @@ export const useFormAction = formAction$<RegisterForm, ResponseData>(async (valu
 }, zodForm$(registerSchema));
 
 export default component$(() => {
+    const token = useContext(JwtContext);
     const [registerForm, { Form, Field }] = useForm<RegisterForm,ResponseData>({
         loader: useFormLoader(),
         action: useFormAction(),

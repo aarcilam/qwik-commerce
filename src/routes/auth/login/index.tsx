@@ -1,8 +1,9 @@
-import { component$, $ } from '@builder.io/qwik';
-import { DocumentHead, routeLoader$, z } from '@builder.io/qwik-city';
+import { component$, $, useContext } from '@builder.io/qwik';
+import { DocumentHead, routeLoader$, useNavigate, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
 import { ButtonInput } from '~/components/shared/forms/button-input/button-input';
 import { TextInput } from '~/components/shared/forms/text-input/text-input';
+import { JwtContext } from '~/context/auth/auth-provider';
 
 const loginSchema = z.object({
   email: z
