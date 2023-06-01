@@ -1,6 +1,8 @@
 import { component$, $ } from '@builder.io/qwik';
 import { DocumentHead, routeLoader$, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
+import { ButtonInput } from '~/components/shared/forms/button-input/button-input';
+import { TextInput } from '~/components/shared/forms/text-input/text-input';
 
 const loginSchema = z.object({
   email: z
@@ -40,21 +42,25 @@ export default component$(() => {
        <Form onSubmit$={handleSubmit}>
         <Field name="email">
             {(field, props) => (
-            <div>
-                <input {...props} type="email" value={field.value} />
-                {field.error && <div>{field.error}</div>}
-            </div>
+              <TextInput 
+                props={props} 
+                type="email" 
+                field={field} 
+                placeholder='Insert a valid email'
+              />
             )}
         </Field>
         <Field name="password">
             {(field, props) => (
-            <div>
-                <input {...props} type="password" value={field.value} />
-                {field.error && <div>{field.error}</div>}
-            </div>
+              <TextInput 
+                props={props} 
+                type="password" 
+                field={field} 
+                placeholder='Insert password'
+              />
             )}
         </Field>
-        <input type="submit" />
+        <ButtonInput value='Register' />
     </Form>
     </>
   );
