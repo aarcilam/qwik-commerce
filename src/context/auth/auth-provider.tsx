@@ -14,11 +14,17 @@ export const AuthProvider = component$(() => {
     useVisibleTask$(()=>{
         const token = localStorage.getItem('jwtToken');
         tokenSignal.value = token? token: '';
-        if(token){
+        if(tokenSignal.value!=''){
             if(loc.url.pathname.includes('login') || loc.url.pathname.includes('register')){
                 nav('/profile')
             }
         }
     });
+
+    useVisibleTask$(({track})=>{
+        track(() => tokenSignal.value);
+        // Guardar el token en el almacenamiento local
+        localStorage.setItem('jwtToken', tokenSignal.value);
+    })
     return <Slot />
 });

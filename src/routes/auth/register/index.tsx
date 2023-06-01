@@ -1,5 +1,5 @@
 import { component$, $, useVisibleTask$, useSignal, useContext } from '@builder.io/qwik';
-import { DocumentHead, routeLoader$, z } from '@builder.io/qwik-city';
+import { DocumentHead, routeLoader$, useNavigate, z } from '@builder.io/qwik-city';
 import { InitialValues, SubmitHandler, formAction$, useForm, zodForm$ } from '@modular-forms/qwik';
 import { UserService } from '~/services/UserService';
 import * as jwt from 'jsonwebtoken';
@@ -82,14 +82,9 @@ export default component$(() => {
     useVisibleTask$(({ track }) => {
         track(() => registerForm.response);
         if(!registerForm.response.data) return;
-
-        if(registerForm.response.status == "success"){
-            alert("success");
-            // Guardar el token en el almacenamiento local
-            localStorage.setItem('jwtToken', registerForm.response.data.token);
-        }
-        console.log("useVisibleTask",registerForm.response.data.token);
-        
+        if(registerForm.response.status != "success") return 
+        token.value = registerForm.response.data.token;
+        console.log("useVisibleTask",token.value);
     });
 
   return (
