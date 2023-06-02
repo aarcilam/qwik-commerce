@@ -15,7 +15,9 @@ export const Product = component$<ProductProps>((props) => {
   })
   return (
     <div>
-      <img src={props.image} alt="" />
+      {props.image != null &&
+        <img src={props.image} alt="" />
+      }
       <h2 >{props.name}</h2>
       <span> {props.price} </span>
       <Button text="Add To Cart" onClick$={() => addToCart()}></Button>
