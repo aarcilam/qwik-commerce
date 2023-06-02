@@ -32,6 +32,13 @@ export const useFormAction = formAction$<LoginForm,LoggedUsedResponseData>(async
     const userService = new UserService();
     const loggedUser:User|null = await userService.getUserByEmail(values.email);
     if(loggedUser == null) return;
+    const validatePass = await userService.validateUser(loggedUser,values.password);
+    if(!validatePass){
+      return {
+        status: 'error',
+        message: 'error'
+        };
+    }
     const token = userService.createToken(loggedUser.id,loggedUser.email);
     return {
         status: 'success',
@@ -65,7 +72,10 @@ export default component$(() => {
   useVisibleTask$(({ track }) => {
     track(() => loginForm.response);
     if(!loginForm.response.data) return;
-    if(loginForm.response.status != "success") return 
+    if(loginForm.response.status != "success") {
+      alert("error");
+      return
+    } 
     token.value = loginForm.response.data.token;
     nav('/profile');
 });

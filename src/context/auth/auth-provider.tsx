@@ -18,6 +18,8 @@ export const AuthProvider = component$(() => {
             if(loc.url.pathname.includes('login') || loc.url.pathname.includes('register')){
                 nav('/profile')
             }
+        }else{
+            nav('/auth/login')
         }
     });
 

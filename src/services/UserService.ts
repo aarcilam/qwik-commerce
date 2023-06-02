@@ -20,6 +20,15 @@ export class UserService {
     return token;
   }
 
+  async validateUser(user:User,candidatePassword:string):Promise<boolean>{
+    try {
+      const isMatch = await bcrypt.compare(candidatePassword, user.password);
+      return isMatch;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getUserById(userId: number): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
