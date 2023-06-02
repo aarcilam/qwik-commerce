@@ -1,6 +1,7 @@
 import { Resource, component$, useResource$ } from '@builder.io/qwik';
 import { DocumentHead, routeLoader$, server$ } from '@builder.io/qwik-city';
 import { Product } from '@prisma/client';
+import { Product as ProductComponent } from '~/components/product/product';
 import { ProductService } from '~/services/ProductService';
 
 
@@ -23,7 +24,7 @@ export default component$(() => {
         onResolved={(products) => (
           <>
             {products.map((product, i) => (
-              <p key={i}>{product.name}</p>
+              <ProductComponent {...product} />
             ))}
           </>
         )}
