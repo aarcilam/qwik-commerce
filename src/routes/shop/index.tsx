@@ -22,11 +22,13 @@ export default component$(() => {
         value={products}
         onPending={() => <p>Loading...</p>}
         onResolved={(products) => (
-          <>
+          <div class="flex">
             {products.map((product, i) => (
-              <ProductComponent {...product} />
+              <div class="w-1/3">
+                <ProductComponent {...product} />
+              </div>
             ))}
-          </>
+          </div>
         )}
       />
     </>
