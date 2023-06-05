@@ -15,6 +15,7 @@ export function useCart(){
         if (index !== -1) {
           cartContext.products.splice(index, 1);
         }
+        cartContext.products = [...cartContext.products];
     });
     
     const total = useComputed$(() => {
