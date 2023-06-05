@@ -18,7 +18,7 @@ export const Product = component$<ProductProps>((props) => {
   return (
     <>
       <ImageWithBackHover frontImage={props.image} backImage={props.image}/>
-      <h2>{props.name}</h2>
+      <h2>{props.id}{props.name}</h2>
       <ShowPrice price={props.price} />
       <Button text="Add To Cart" onClick$={() => addToCart()}></Button>
     </>
