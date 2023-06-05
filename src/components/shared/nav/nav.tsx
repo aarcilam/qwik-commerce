@@ -272,10 +272,10 @@ export const Nav = component$(() => {
                             </button>
 
                             <div class="ml-4 flex lg:ml-0">
-                                <a href="#">
+                                <Link href="/">
                                     <span class="sr-only">Your Company</span>
                                     <img class="h-8 w-auto" src="https://s3-alpha.figma.com/hub/file/2649946739/f6a7462a-0e1d-42d2-81aa-548a5dbce420-cover.png" alt="" />
-                                </a>
+                                </Link>
                             </div>
 
                             <div class="hidden lg:ml-8 lg:block lg:self-stretch">
