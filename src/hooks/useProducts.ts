@@ -3,7 +3,7 @@ import { Product } from "@prisma/client";
 import { ProductService } from "~/services/ProductService";
 
 export function useProducts() {
-    const products:Product[] = useStore([])
+    const products:Product[] = useStore([]);
 
     // TODO on this hook we need functions to refresh resource , to get more items 
     const productsResource = useResource$(async ({ track }):Promise<Product[]> => {
