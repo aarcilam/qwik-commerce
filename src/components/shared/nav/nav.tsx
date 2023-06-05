@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import { useCart } from "~/hooks/useCart";
 import { ShowPrice } from "../show-price/show-price";
 import { CartResume } from "~/components/cart-resume/cart-resume";
+import { Link } from "@builder.io/qwik-city";
 
 export const Nav = component$(() => {
     const cart = useCart();
@@ -10,7 +11,7 @@ export const Nav = component$(() => {
         //     <div>cart: {cart.count.value} <ShowPrice price={cart.total.value}></ShowPrice></div>
         //     <CartResume />
         // </header>
-        <div class="bg-white">
+        <div class="bg-white fixed top-0 left-0 z-50 w-full">
             <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
                 <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 
@@ -239,10 +240,10 @@ export const Nav = component$(() => {
 
                         <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                             <div class="flow-root">
-                                <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Sign in</a>
+                                <Link href="/auth/login" class="-m-2 block p-2 font-medium text-gray-900">Sign in</Link>
                             </div>
                             <div class="flow-root">
-                                <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Create account</a>
+                                <Link href="/auth/register" class="-m-2 block p-2 font-medium text-gray-900">Create account</Link>
                             </div>
                         </div>
 
@@ -277,15 +278,14 @@ export const Nav = component$(() => {
                                 </a>
                             </div>
 
-                            {/* TODO submenu on other component 
                             <div class="hidden lg:ml-8 lg:block lg:self-stretch">
                                 <div class="flex h-full space-x-8">
                                     <div class="flex">
                                         <div class="relative flex">
-                                            <button type="button" class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out" aria-expanded="false">Women</button>
+                                            <Link href="/shop" class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out" aria-expanded="false">Shop</Link>
                                         </div>
 
-                                        <div class="absolute inset-x-0 top-full text-sm text-gray-500">
+                                        {/* <div class="absolute inset-x-0 top-full text-sm text-gray-500">
                                             <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
 
                                             <div class="relative bg-white">
@@ -393,125 +393,16 @@ export const Nav = component$(() => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
-                                    <div class="flex">
-                                        <div class="relative flex">
-                                            <button type="button" class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out" aria-expanded="false">Men</button>
-                                        </div>
-
-                                        <div class="absolute inset-x-0 top-full text-sm text-gray-500">
-                                            <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
-
-                                            <div class="relative bg-white">
-                                                <div class="mx-auto max-w-7xl px-8">
-                                                    <div class="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                                                        <div class="col-start-2 grid grid-cols-2 gap-x-8">
-                                                            <div class="group relative text-base sm:text-sm">
-                                                                <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                                                    <img src="https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg" alt="Drawstring top with elastic loop closure and textured interior padding." class="object-cover object-center" />
-                                                                </div>
-                                                                <a href="#" class="mt-6 block font-medium text-gray-900">
-                                                                    <span class="absolute inset-0 z-10" aria-hidden="true"></span>
-                                                                    New Arrivals
-                                                                </a>
-                                                                <p aria-hidden="true" class="mt-1">Shop now</p>
-                                                            </div>
-                                                            <div class="group relative text-base sm:text-sm">
-                                                                <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                                                    <img src="https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg" alt="Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt." class="object-cover object-center" />
-                                                                </div>
-                                                                <a href="#" class="mt-6 block font-medium text-gray-900">
-                                                                    <span class="absolute inset-0 z-10" aria-hidden="true"></span>
-                                                                    Artwork Tees
-                                                                </a>
-                                                                <p aria-hidden="true" class="mt-1">Shop now</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                                            <div>
-                                                                <p id="Clothing-heading" class="font-medium text-gray-900">Clothing</p>
-                                                                <ul role="list" aria-labelledby="Clothing-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Tops</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Pants</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Sweaters</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">T-Shirts</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Jackets</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Activewear</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Browse All</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div>
-                                                                <p id="Accessories-heading" class="font-medium text-gray-900">Accessories</p>
-                                                                <ul role="list" aria-labelledby="Accessories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Watches</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Wallets</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Bags</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Sunglasses</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Hats</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Belts</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div>
-                                                                <p id="Brands-heading" class="font-medium text-gray-900">Brands</p>
-                                                                <ul role="list" aria-labelledby="Brands-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Re-Arranged</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Counterfeit</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">Full Nelson</a>
-                                                                    </li>
-                                                                    <li class="flex">
-                                                                        <a href="#" class="hover:text-gray-800">My Way</a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Company</a>
-                                    <a href="#" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Stores</a>
                                 </div>
-                            </div> */}
+                            </div>
 
                             <div class="ml-auto flex items-center">
                                 <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-800">Sign in</a>
+                                    <Link href="/auth/login" class="text-sm font-medium text-gray-700 hover:text-gray-800">Sign in</Link>
                                     <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
-                                    <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-800">Create account</a>
+                                    <Link href="/auth/register" class="text-sm font-medium text-gray-700 hover:text-gray-800">Create account</Link>
                                 </div>
 
                                 <div class="hidden lg:ml-8 lg:flex">
