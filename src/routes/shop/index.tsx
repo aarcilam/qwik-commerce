@@ -22,7 +22,7 @@ export default component$(() => {
           <div class="flex">
             {products.map((product, i) => (
               <div class="w-1/3">
-                <ProductComponent {...product} />
+                <ProductComponent product={product} />
               </div>
             ))}
           </div>

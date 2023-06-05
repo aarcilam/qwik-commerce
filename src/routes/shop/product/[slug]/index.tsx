@@ -14,7 +14,7 @@ export default component$(() => {
           onPending={() => <p>Loading...</p>}
           onResolved={(product) => (
             <div>
-              {product!=null && <Product {...product} />}
+              {product!=null && <Product product={product} />}
             </div>
           )}
         />
