@@ -5,9 +5,12 @@ export interface ShowPriceProps {
 }
 
 export const ShowPrice = component$<ShowPriceProps>((props) => {
+  const formatCurrency = (number:number, locale = 'en-US', currency = 'USD') => {
+    return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(number);
+  };
   return (
     <div>
-      {props.price}
+      {formatCurrency(props.price)}
     </div>
   );
 });
