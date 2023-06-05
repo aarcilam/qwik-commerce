@@ -17,9 +17,10 @@ export const CartProvider = component$(() => {
 
     useVisibleTask$(()=>{
         const stringCart = localStorage.getItem('cart');
+        console.log(stringCart);
         if(stringCart) {
-            // console.log(JSON.parse(stringCart));
-            // cart.products = JSON.parse(stringCart).products;
+            console.log(JSON.parse(stringCart));
+            cart.products = JSON.parse(stringCart).products;
         }
     });
 

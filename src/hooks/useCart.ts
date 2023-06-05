@@ -7,7 +7,14 @@ export function useCart(){
 
     const addToCart = $((product:Product) => {
         console.log(cartContext,product);
-        cartContext.products.push(product);
+        cartContext.products = [...cartContext.products, product];
+    });
+
+    const removeFromCart = $((product: Product) => {
+        const index = cartContext.products.findIndex((p) => p === product);
+        if (index !== -1) {
+          cartContext.products.splice(index, 1);
+        }
     });
     
     const total = useComputed$(() => {
@@ -21,6 +28,7 @@ export function useCart(){
     return{
         cart: cartContext,
         addToCart,
+        removeFromCart,
         total,
         count
     }
