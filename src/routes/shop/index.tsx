@@ -1,20 +1,17 @@
-import { Resource, component$, useResource$ } from '@builder.io/qwik';
-import { DocumentHead, routeLoader$, server$ } from '@builder.io/qwik-city';
-import { Product } from '@prisma/client';
+import { Resource, component$, useOnDocument, $, useVisibleTask$ } from '@builder.io/qwik';
+import { DocumentHead } from '@builder.io/qwik-city';
 import { Product as ProductComponent } from '~/components/product/product';
-import { ProductService } from '~/services/ProductService';
+import { useProducts } from '~/hooks/useProducts';
+import { useScroll } from '~/hooks/useScroll';
 
-
-export const useGetProducts = routeLoader$(async () => {
-  const productService = new ProductService();
-  return await productService.getProducts();
-});
 
 export default component$(() => {
-  const products = useResource$(async ({ track }):Promise<Product[]> => {
-    const productService = new ProductService();
-    return await productService.getProducts();
-  }); 
+  const {products} = useProducts();
+  const {endOfPage} = useScroll();
+  useVisibleTask$(({track})=>{
+    track(()=>endOfPage.value);
+    console.log(endOfPage.value);
+  })
   return (
     <>
       <h1>Shop</h1>
