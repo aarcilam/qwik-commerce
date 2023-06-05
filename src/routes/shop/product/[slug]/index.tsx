@@ -5,12 +5,12 @@ import { useProducts } from '~/hooks/useProducts';
 
 export default component$(() => {
     const loc = useLocation();
-    const {product} = useProducts();
-    const productResource = product(+loc.params.slug);
+    const {productResource} = useProducts();
+    const product = productResource(+loc.params.slug);
     return (
       <div>
         <Resource
-          value={productResource}
+          value={product}
           onPending={() => <p>Loading...</p>}
           onResolved={(product) => (
             <div>

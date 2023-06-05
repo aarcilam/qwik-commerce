@@ -6,7 +6,7 @@ import { useScroll } from '~/hooks/useScroll';
 
 
 export default component$(() => {
-  const {products} = useProducts();
+  const {productsResource} = useProducts();
   const {endOfPage} = useScroll();
   useVisibleTask$(({track})=>{
     track(()=>endOfPage.value);
@@ -16,7 +16,7 @@ export default component$(() => {
     <>
       <h1>Shop</h1>
       <Resource
-        value={products}
+        value={productsResource}
         onPending={() => <p>Loading...</p>}
         onResolved={(products) => (
           <div class="flex">
