@@ -3,7 +3,6 @@ import { Button } from "../shared/button/button";
 import { ShowPrice } from "../shared/show-price/show-price";
 import { ImageWithBackHover } from "../shared/image-with-back-hover/image-with-back-hover";
 import { Product as ProductInterface, ProductVariation } from "@prisma/client";
-import { CartContext } from "~/context/cart/cart-provider";
 import { useCart } from "~/hooks/useCart";
 import { Link } from "@builder.io/qwik-city";
 
