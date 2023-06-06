@@ -6,6 +6,7 @@ export function useCart(){
     const cart = useContext(CartContext);
 
     const addToCart = $((product: Product) => {
+        // TODO receive the variation to add to cart
         const existingItem = cart.orderItems.find(item => item.product === product);
         if (existingItem) {
             existingItem.quantity += 1;

@@ -15,7 +15,7 @@ export interface ProductProps {
 
 export const ProductDetail = component$<ProductProps>((props) => {
   const {addToCart} = useCart();
-
+    // TODO save the variation selected on a signal for addToCart with variation
   return (
     <>
     <div class="flex">

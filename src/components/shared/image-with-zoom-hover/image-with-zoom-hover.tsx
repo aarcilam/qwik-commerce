@@ -5,6 +5,7 @@ export interface ImageWithBackHoverProps {
 }
 
 export const ImageWithZoomHover = component$<ImageWithBackHoverProps>((props) => {
+    // TODO zoom on hover 
   return (
     <div>
         {props.frontImage != null &&
