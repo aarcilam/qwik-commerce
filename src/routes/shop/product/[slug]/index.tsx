@@ -5,8 +5,8 @@ import { useProducts } from '~/hooks/useProducts';
 
 export default component$(() => {
     const loc = useLocation();
-    const {productResource} = useProducts();
-    const product = productResource(+loc.params.slug);
+    const {getProduct} = useProducts();
+    const product = getProduct(+loc.params.slug);
     return (
       <div>
         <Resource
