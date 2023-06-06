@@ -8,7 +8,7 @@ export const Nav = component$(() => {
     const cart = useCart();
     // TODO make dropdown cart with the cart resume component
     return (
-        <div class="bg-white fixed top-0 left-0 z-50 w-full">
+        <div class="bg-white fixed top-0 left-0 z-40 w-full">
             <div class="relative z-40 lg:hidden" role="dialog" aria-modal="true">
                 <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 

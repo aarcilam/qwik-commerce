@@ -14,6 +14,7 @@ export function useCart(){
         } else {
             cart.orderItems = [...cart.orderItems, {product,quantity:1}];
         }
+        cart.lastAdded = {product,quantity:1};
         console.log(cart, product);
     });
 
