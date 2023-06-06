@@ -5,9 +5,15 @@ import { CartContext } from "~/context/cart/cart-provider"
 export function useCart(){
     const cart = useContext(CartContext);
 
-    const addToCart = $((product:Product) => {
-        console.log(cart,product);
-        cart.orderItems = [...cart.orderItems, {product,quantity:1}];
+    const addToCart = $((product: Product) => {
+        const existingItem = cart.orderItems.find(item => item.product === product);
+        if (existingItem) {
+            existingItem.quantity += 1;
+            cart.orderItems = [...cart.orderItems];
+        } else {
+            cart.orderItems = [...cart.orderItems, {product,quantity:1}];
+        }
+        console.log(cart, product);
     });
 
     const removeFromCart = $((product: Product) => {
