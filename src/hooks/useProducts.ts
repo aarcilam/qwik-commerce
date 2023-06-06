@@ -1,11 +1,13 @@
 import { useResource$, useStore } from "@builder.io/qwik";
-import { Product } from "@prisma/client";
+import { Product, ProductVariation } from "@prisma/client";
 import { ProductService } from "~/services/ProductService";
 import { isServer } from '@builder.io/qwik/build';
 import { server$ } from "@builder.io/qwik-city";
 
 export function useProducts() {
-    const products:Product[] = useStore([]);
+    const products:(Product & {
+        variations: ProductVariation[];
+    })[] = useStore([]);
 
     const getProducts = server$(async () => {
         const productService = new ProductService();
@@ -19,13 +21,17 @@ export function useProducts() {
     });
 
     // TODO on this hook we need functions to refresh resource , to get more items 
-    const productsResource = useResource$(async ({ track }):Promise<Product[]> => {
+    const productsResource = useResource$(async ({ track }):Promise<(Product & {
+        variations: ProductVariation[];
+    })[]> => {
         // TODO we need to set a max number of products
         return await getProducts();
     }); 
 
     const productResource = (id:number)=>{
-        return useResource$(async ({ track }):Promise<Product | null> => {
+        return useResource$(async ({ track }):Promise<(Product & {
+            variations: ProductVariation[];
+        }) | null> => {
             // TODO we need to set a max number of products
             return await getProduct(id);
         })

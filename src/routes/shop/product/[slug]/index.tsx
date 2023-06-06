@@ -1,6 +1,6 @@
 import { Resource, component$ } from '@builder.io/qwik';
 import { DocumentHead, useLocation } from '@builder.io/qwik-city';
-import { Product } from '~/components/product/product';
+import { ProductDetail } from '~/components/product-detail/product-detail';
 import { useProducts } from '~/hooks/useProducts';
 
 export default component$(() => {
@@ -14,7 +14,7 @@ export default component$(() => {
           onPending={() => <p>Loading...</p>}
           onResolved={(product) => (
             <div>
-              {product!=null && <Product product={product} />}
+              {product!=null && <ProductDetail product={product} />}
             </div>
           )}
         />

@@ -2,13 +2,14 @@ import { component$, $, useContext } from "@builder.io/qwik";
 import { Button } from "../shared/button/button";
 import { ShowPrice } from "../shared/show-price/show-price";
 import { ImageWithBackHover } from "../shared/image-with-back-hover/image-with-back-hover";
-import { Product as ProductInterface } from "@prisma/client";
-import { CartContext } from "~/context/cart/cart-provider";
+import { Product as ProductInterface, ProductVariation } from "@prisma/client";
 import { useCart } from "~/hooks/useCart";
 import { Link } from "@builder.io/qwik-city";
 
 export interface ProductProps {
-  product:ProductInterface
+  product:(ProductInterface & {
+      variations: ProductVariation[];
+  })
 }
 
 export const Product = component$<ProductProps>((props) => {
