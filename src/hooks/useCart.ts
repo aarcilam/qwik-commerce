@@ -26,18 +26,23 @@ export function useCart(){
     });
     
     const total = useComputed$(() => {
-        return cart.orderItems.map(item=>item.product.price).reduce((prev,current)=>{return prev + current},0);
+        return cart.orderItems.map(item=>(item.product.price*item.quantity)).reduce((prev,current)=>{return prev + current},0);
     });
 
     const count = useComputed$(() => {
-        return cart.orderItems.length;
+        return cart.orderItems.map(item=>item.quantity).reduce((prev,current)=>{return prev + current},0);
     });
+
+    const clearCart = $(()=>{
+        cart.orderItems = [];
+    })
 
     return{
         cart: cart,
         addToCart,
         removeFromCart,
         total,
-        count
+        count,
+        clearCart
     }
 }

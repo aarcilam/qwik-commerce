@@ -4,13 +4,13 @@ import { ShowPrice } from "../shared/show-price/show-price";
 import { Button } from "../shared/button/button";
 
 export const CartResume = component$(() => {
-    const { cart, removeFromCart, total } = useCart();
+    const { cart, removeFromCart, total, clearCart } = useCart();
     return (
         <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
             <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                 <div class="flex items-start justify-between">
                     <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
-
+                    <Button text="Clear Cart" onClick$={()=>clearCart()}></Button>
                 </div>
 
                 <div class="mt-8">
