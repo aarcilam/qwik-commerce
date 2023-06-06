@@ -5,28 +5,34 @@ export const CartContext = createContextId<CartStore>(
     'cart.cart-context'
 );
 
+export interface CartItem{
+    product:Product,
+    quantity: number
+}
+
 interface CartStore{
-    products:Product[]
+    orderItems: CartItem[]
 }
 
 export const CartProvider = component$(() => {
     const cart:CartStore = useStore({
-        products: []
+        orderItems: []  
     });
     useContextProvider(CartContext, cart);
 
-    useVisibleTask$(()=>{
+    useVisibleTask$(() => {
         const stringCart = localStorage.getItem('cart');
         console.log(stringCart);
-        if(stringCart) {
+        if (stringCart) {
             console.log(JSON.parse(stringCart));
-            cart.products = JSON.parse(stringCart).products;
+            const parsedCart = JSON.parse(stringCart);
+            cart.orderItems = parsedCart.orderItems;
         }
     });
 
-    useVisibleTask$(({track})=>{
-        track(() => cart.products);
-        console.log(cart.products);
+    useVisibleTask$(({ track }) => {
+        track(() => cart.orderItems);
+        console.log(cart.orderItems);
         localStorage.setItem('cart', JSON.stringify(cart));
     });
 

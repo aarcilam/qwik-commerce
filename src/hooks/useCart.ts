@@ -3,31 +3,37 @@ import { Product } from "@prisma/client";
 import { CartContext } from "~/context/cart/cart-provider"
 
 export function useCart(){
-    const cartContext = useContext(CartContext);
+    const cart = useContext(CartContext);
 
-    const addToCart = $((product:Product) => {
-        console.log(cartContext,product);
-        cartContext.products = [...cartContext.products, product];
+    const addToCart = $((product: Product) => {
+        const existingItem = cart.orderItems.find(item => item.product === product);
+        if (existingItem) {
+            existingItem.quantity += 1;
+            cart.orderItems = [...cart.orderItems];
+        } else {
+            cart.orderItems = [...cart.orderItems, {product,quantity:1}];
+        }
+        console.log(cart, product);
     });
 
     const removeFromCart = $((product: Product) => {
-        const index = cartContext.products.findIndex((p) => p === product);
+        const index = cart.orderItems.findIndex((item) => item.product === product);
         if (index !== -1) {
-          cartContext.products.splice(index, 1);
+          cart.orderItems.splice(index, 1);
         }
-        cartContext.products = [...cartContext.products];
+        cart.orderItems = [...cart.orderItems];
     });
     
     const total = useComputed$(() => {
-        return cartContext.products.map(product=>product.price).reduce((prev,current)=>{return prev + current},0);
+        return cart.orderItems.map(item=>item.product.price).reduce((prev,current)=>{return prev + current},0);
     });
 
     const count = useComputed$(() => {
-        return cartContext.products.length;
+        return cart.orderItems.length;
     });
 
     return{
-        cart: cartContext,
+        cart: cart,
         addToCart,
         removeFromCart,
         total,

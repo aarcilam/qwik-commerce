@@ -6,8 +6,8 @@ import { Button } from "../shared/button/button";
 export const CartResume = component$(() => {
     const {cart,removeFromCart} = useCart();
     return (<div>
-        {cart.products.map(product=>(
-            <div>{product.name} - <ShowPrice price={product.price}/> - <Button text="remove" onClick$={()=>removeFromCart(product)} /></div>
+        {cart.orderItems.map(item=>(
+            <div>{item.product.name} - <ShowPrice price={item.product.price}/> - <Button text="remove" onClick$={()=>removeFromCart(item.product)} /></div>
         ))}
     </div>);
 });
