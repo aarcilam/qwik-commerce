@@ -7,7 +7,7 @@ export function useCart(){
 
     const addToCart = $((product:Product) => {
         console.log(cart,product);
-        cart.orderItems = [...cart.orderItems, {product,quantity:0}];
+        cart.orderItems = [...cart.orderItems, {product,quantity:1}];
     });
 
     const removeFromCart = $((product: Product) => {

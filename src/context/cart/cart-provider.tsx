@@ -15,21 +15,22 @@ interface CartStore{
 }
 
 export const CartProvider = component$(() => {
-    const cart:(CartStore & {orderItems:CartItem[] & {product:Product}}) = useStore({
+    const cart:CartStore = useStore({
         orderItems: []  
     });
     useContextProvider(CartContext, cart);
 
-    useVisibleTask$(()=>{
+    useVisibleTask$(() => {
         const stringCart = localStorage.getItem('cart');
         console.log(stringCart);
-        if(stringCart) {
+        if (stringCart) {
             console.log(JSON.parse(stringCart));
-            cart.orderItems = JSON.parse(stringCart).orderItems;
+            const parsedCart = JSON.parse(stringCart);
+            cart.orderItems = parsedCart.orderItems;
         }
     });
 
-    useVisibleTask$(({track})=>{
+    useVisibleTask$(({ track }) => {
         track(() => cart.orderItems);
         console.log(cart.orderItems);
         localStorage.setItem('cart', JSON.stringify(cart));
