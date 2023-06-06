@@ -1,5 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { ProductsCollection } from '~/components/products-collection/products-collection';
 
 export default component$(() => {
   // TODO extract the hero code to the component
@@ -30,7 +31,7 @@ export default component$(() => {
           </div>
         </div>
       </div>
-
+      <ProductsCollection products={null} />
     </div>
   );
 });
