@@ -1,11 +1,12 @@
-import { PrismaClient, Product } from "@prisma/client";
+import { PrismaClient, Product, ProductVariation } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export class ProductService {
-    async getProducts(): Promise<Product[]> {
-        const product = await prisma.product.findMany();
-        return product;
+    async getProducts(): Promise<(Product & {variations: ProductVariation[]})[]> {
+        // TODO recieve a quantity of products to get and an offset to make a pagination
+        const products = await prisma.product.findMany({include:{variations: true}});
+        return products;
     }
       
     async createProduct(productData: Omit<Product, "id">): Promise<Product> {
@@ -15,11 +16,12 @@ export class ProductService {
         return product;
     }
 
-    async getProductById(productId: number): Promise<Product | null> {
+    async getProductById(productId: number): Promise<Product & {variations: ProductVariation[]} | null> {
         const product = await prisma.product.findUnique({
         where: {
             id: productId,
         },
+        include: {variations: true}
         });
         return product;
     }
