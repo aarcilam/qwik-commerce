@@ -2,6 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 export default component$(() => {
+  // TODO extract the hero code to the component
   return (
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="bg-white">

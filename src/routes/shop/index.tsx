@@ -10,6 +10,7 @@ export default component$(() => {
   const {endOfPage} = useScroll();
   useVisibleTask$(({track})=>{
     track(()=>endOfPage.value);
+    // TODO when this track fires get new products need a signal to save the actual offset 
     console.log(endOfPage.value);
   })
   return (
