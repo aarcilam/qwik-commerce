@@ -3,18 +3,23 @@ import { Product, ProductVariation } from "@prisma/client";
 import { ProductService } from "~/services/ProductService";
 import { server$ } from "@builder.io/qwik-city";
 
-export function useProducts() {
-    const products:(Product & {
+interface ProductsStore{
+    products:(Product & {
         variations: ProductVariation[];
-    })[] = useStore([]);
+    })[]
+}
+
+export function useProducts() {
+    const productsStore:ProductsStore = useStore({
+        products: []
+    });
 
     const take = useSignal(9);
     const skip = useSignal(0);
 
     const getProducts = server$(async () => {
         const productService = new ProductService();
-        products.push(...await productService.getProducts(skip.value,take.value));
-        return products;
+        return await productService.getProducts(skip.value,take.value);
     });
 
     const getProduct = server$(async (id:number) => {
@@ -22,21 +27,11 @@ export function useProducts() {
         return await productService.getProductById(id);
     });
 
-    // TODO on this hook we need functions to refresh resource , to get more items 
-    const productsResource = useResource$(async ({ track }):Promise<(Product & {
-        variations: ProductVariation[];
-    })[]> => {
-        track(()=>skip.value)
-        // TODO we need to set a max number of products
-        return await getProducts();
-    }); 
-
-
     return{
-        products,
-        productsResource,
+        productsStore,
+        getProduct,
+        getProducts,
         take,
         skip,
-        getProduct
     }
 }
