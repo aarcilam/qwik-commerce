@@ -1,16 +1,17 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { CartResume } from '~/components/cart-resume/cart-resume';
 
 export default component$(() => {
   return (
     <>
-      <h1>Cart</h1>
+      <CartResume />
     </>
   );
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik',
+  title: 'Cart',
   meta: [
     {
       name: 'description',
