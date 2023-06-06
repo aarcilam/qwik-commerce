@@ -6,6 +6,7 @@ import { Product, ProductVariation } from "@prisma/client";
 import { useCart } from "~/hooks/useCart";
 import { ImageWithZoomHover } from "../shared/image-with-zoom-hover/image-with-zoom-hover";
 import { Select } from "../shared/forms/select/select";
+import { ProductsCollection } from "../products-collection/products-collection";
 
 export interface ProductProps {
   product:(Product & {
@@ -31,7 +32,7 @@ export const ProductDetail = component$<ProductProps>((props) => {
             <Button text="Add To Cart" onClick$={() => addToCart(props.product)}></Button>
         </div>
     </div>
-
+    <ProductsCollection products={null} />
     </>
   );
 });
