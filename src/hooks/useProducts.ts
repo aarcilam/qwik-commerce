@@ -1,7 +1,6 @@
-import { useResource$, useStore } from "@builder.io/qwik";
+import { $, useResource$, useSignal, useStore } from "@builder.io/qwik";
 import { Product, ProductVariation } from "@prisma/client";
 import { ProductService } from "~/services/ProductService";
-import { isServer } from '@builder.io/qwik/build';
 import { server$ } from "@builder.io/qwik-city";
 
 export function useProducts() {
@@ -9,9 +8,12 @@ export function useProducts() {
         variations: ProductVariation[];
     })[] = useStore([]);
 
+    const take = useSignal(9);
+    const skip = useSignal(0);
+
     const getProducts = server$(async () => {
         const productService = new ProductService();
-        products.push(...await productService.getProducts());
+        products.push(...await productService.getProducts(skip.value,take.value));
         return products;
     });
 
@@ -24,22 +26,17 @@ export function useProducts() {
     const productsResource = useResource$(async ({ track }):Promise<(Product & {
         variations: ProductVariation[];
     })[]> => {
+        track(()=>skip.value)
         // TODO we need to set a max number of products
         return await getProducts();
     }); 
 
-    const productResource = (id:number)=>{
-        return useResource$(async ({ track }):Promise<(Product & {
-            variations: ProductVariation[];
-        }) | null> => {
-            // TODO we need to set a max number of products
-            return await getProduct(id);
-        })
-    }
 
     return{
         products,
         productsResource,
-        productResource
+        take,
+        skip,
+        getProduct
     }
 }
