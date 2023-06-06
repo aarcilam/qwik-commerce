@@ -14,6 +14,7 @@ export default component$(() => {
     const products = await getProducts();
     productsStore.products = [...productsStore.products,...products]
     if(endOfPage.value){
+      console.log(endOfPage.value);
       skip.value += take.value;
     }
   })
@@ -26,7 +27,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik',
+  title: 'Shop',
   meta: [
     {
       name: 'description',
