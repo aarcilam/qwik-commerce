@@ -16,6 +16,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orders    Order[]
+  addresses Address[]
 }
 
 model Order {
@@ -65,4 +66,13 @@ model Category {
   id    Int    @id @default(autoincrement())
   name  String
   products Product[]
+}
+
+model Address {
+  id    Int    @id @default(autoincrement())
+  description  String
+  city  String
+  country  String
+  userId    Int
+  user  User @relation(fields: [userId], references: [id])
 }
