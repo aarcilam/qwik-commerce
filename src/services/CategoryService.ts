@@ -11,4 +11,15 @@ export class CategoryService {
         );
         return categories;
     }
+
+    async getProductsByCategory(categoryId: number): Promise<Product[] | null> {
+        const category = await prisma.category.findUnique({
+        where: {
+            id: categoryId,
+        },
+        include: {products: true}
+        });
+        if(category==null) return null;
+        return category.products;
+    }
 }
