@@ -38,6 +38,7 @@ model Product {
   updatedAt       DateTime            @updatedAt
   variations      ProductVariation[]
   orderItems      OrderItem[]
+  categories Category[]
 }
 
 model ProductVariation {
@@ -58,4 +59,10 @@ model OrderItem {
   productId       Int
   variation       ProductVariation?   @relation(fields: [variationId], references: [id])
   variationId     Int?
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  products Product[]
 }
