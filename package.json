@@ -21,7 +21,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:prod": "prisma migrate deploy",
-    "prisma:strudio": "npx prisma studio",
+    "db:studio": "npx prisma studio",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },
