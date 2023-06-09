@@ -11,10 +11,10 @@ export const Menu = component$(() => {
         categories.value = [...categories.value,...cats]
       })
     return( <>
-        <Link href="/shop" class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">Shop</Link>
+        <Link href="/shop" class=" text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">Shop</Link>
         {
             categories.value.map((category: any) => (
-                <Link href={"/shop/category/"+category.id} class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">{category.name}</Link>
+                <Link href={"/shop/category/"+category.id} class=" text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">{category.name}</Link>
             ))
         }
     </>)
