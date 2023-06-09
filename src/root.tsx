@@ -9,7 +9,7 @@ export const ThemeContext = createContextId<Signal>(
 );
 
 export default component$(() => {
-  const theme = useSignal('garden');
+  const theme = useSignal('winter');
   useContextProvider(ThemeContext, theme);
   
   return (
