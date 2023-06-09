@@ -1,4 +1,4 @@
-import { $, useResource$, useSignal, useStore } from "@builder.io/qwik";
+import { $, useComputed$, useResource$, useSignal, useStore } from "@builder.io/qwik";
 import { Product, ProductVariation } from "@prisma/client";
 import { ProductService } from "~/services/ProductService";
 import { server$ } from "@builder.io/qwik-city";

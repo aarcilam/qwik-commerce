@@ -7,22 +7,30 @@ import { useCart } from "~/hooks/useCart";
 import { Link } from "@builder.io/qwik-city";
 
 export interface ProductProps {
-  product:(ProductInterface & {
-      variations: ProductVariation[];
+  product: (ProductInterface & {
+    variations: ProductVariation[];
   })
 }
 
 export const Product = component$<ProductProps>((props) => {
-  const {addToCart} = useCart();
+  const { addToCart } = useCart();
 
   return (
     <>
-    <Link href={'/shop/product/'+props.product.id}>
-      <ImageWithBackHover frontImage={props.product.image} backImage={props.product.image}/>
-      <h2>{props.product.id}{props.product.name}</h2>
-      <ShowPrice price={props.product.price} />
-    </Link>
-    <Button text="Add To Cart" onClick$={() => addToCart(props.product)}></Button>
+      <div class="card bg-base-100 shadow-xl">
+        <Link href={'/shop/product/' + props.product.id} class="px-10 pt-10">
+          <ImageWithBackHover frontImage={props.product.image} backImage={props.product.image} />
+        </Link>
+        <div class="card-body items-center text-center">
+          <Link href={'/shop/product/' + props.product.id}>
+            <h2 class="card-title">{props.product.id}{props.product.name}</h2>
+            <ShowPrice price={props.product.price} />
+          </Link>
+          <div class="card-actions">
+            <Button text="Add To Cart" onClick$={() => addToCart(props.product)}></Button>
+          </div>
+        </div>
+      </div>
     </>
   );
 });

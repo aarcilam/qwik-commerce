@@ -1,17 +1,17 @@
-import { component$ } from '@builder.io/qwik';
+import { Signal, component$, createContextId, useContextProvider, useSignal } from '@builder.io/qwik';
 import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
 import { RouterHead } from './components/router-head/router-head';
 
 import './global.css';
 
-export default component$(() => {
-  /**
-   * The root of a QwikCity site always start with the <QwikCityProvider> component,
-   * immediately followed by the document's <head> and <body>.
-   *
-   * Dont remove the `<head>` and `<body>` elements.
-   */
+export const ThemeContext = createContextId<Signal>(
+  'global.theme'
+);
 
+export default component$(() => {
+  const theme = useSignal('winter');
+  useContextProvider(ThemeContext, theme);
+  
   return (
     <QwikCityProvider>
       <head>
@@ -19,7 +19,7 @@ export default component$(() => {
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
       </head>
-      <body lang="en">
+      <body lang="en" data-theme={theme}>
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>

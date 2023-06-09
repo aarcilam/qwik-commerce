@@ -11,7 +11,7 @@ export interface TextInputProps {
 export const TextInput = component$<TextInputProps>((props) => {
   return (
     <div>
-        <input {...props.props} type={props.type} value={props.field.value} placeholder={props.placeholder} />
+        <input {...props.props} type={props.type} value={props.field.value} placeholder={props.placeholder} class="input input-bordered input-primary w-full max-w-xs" />
         {props.field.error && <div>{props.field.error}</div>}
     </div>
   );
