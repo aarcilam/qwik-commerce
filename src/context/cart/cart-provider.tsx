@@ -48,7 +48,12 @@ export const CartProvider = component$(() => {
     <div>
         { cart.lastAdded != null && 
         // TODO change this to a component
-        <Link href="/shop/cart" class=" w-56 bg-slate-300 z-50 fixed top-10 right-0 p-4">Added to cart {cart.lastAdded.quantity} - {cart.lastAdded.product.name}</Link>}
+        <Link href="/shop/cart"  class="toast toast-top toast-end">
+            <div class="alert alert-success">
+                <span>Added to cart {cart.lastAdded.quantity} - {cart.lastAdded.product.name}</span>
+            </div>
+        </Link>
+        }
         <Slot />
     </div>
     )
