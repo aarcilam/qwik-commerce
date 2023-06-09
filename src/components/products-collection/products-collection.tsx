@@ -20,19 +20,15 @@ export const ProductsCollection = component$<ProductsCollectionProps>((props) =>
         }
     })
     return (
-        <div class="flex flex-wrap">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {products.value && props.products == null &&
                 products.value.map((product: any) => (
-                    <div class="w-1/3">
-                        <ProductComponent product={product} />
-                    </div>
+                    <ProductComponent product={product} />
                 ))
             }
             {props.products != null &&
                 props.products.map((product: any) => (
-                    <div class="w-1/3">
-                        <ProductComponent product={product} />
-                    </div>
+                    <ProductComponent product={product} />
                 ))
             }
         </div>

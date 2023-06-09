@@ -5,7 +5,7 @@ export default component$(() => {
 
   return (
   <AuthProvider>
-    <div class=" pt-32 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="w-2/4 mx-auto py-10">
       <Slot />
     </div>
   </AuthProvider>);
