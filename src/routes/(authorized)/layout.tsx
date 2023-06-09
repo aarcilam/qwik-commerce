@@ -9,10 +9,8 @@ export default component$(() => {
   return (
   <AuthProvider>
     <CartProvider>
-      <Nav />
       <h1>authed</h1>
       <Slot />
-      <Footer />
     </CartProvider>
   </AuthProvider>
   );

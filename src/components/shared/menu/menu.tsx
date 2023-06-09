@@ -17,5 +17,7 @@ export const Menu = component$(() => {
                 <Link href={"/shop/category/"+category.id} class=" text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">{category.name}</Link>
             ))
         }
+        <Link href="/auth/register" class=" text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">Create Account</Link>
+        <Link href="/auth/login" class=" text-sm font-medium transition-colors duration-200 ease-out mx-1" aria-expanded="false">Login</Link>
     </>)
 });
