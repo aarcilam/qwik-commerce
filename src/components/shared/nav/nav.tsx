@@ -34,7 +34,7 @@ export const Nav = component$(() => {
                     <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
                         <div class="card-body">
                             <span class="font-bold text-lg">{cart.count.value} Items</span>
-                            <span class="text-info">Subtotal: <ShowPrice price={cart.total.value}></ShowPrice></span>
+                            {/* <CartResume /> */}
                             <div class="card-actions">
                                 <Link href="/shop/cart" class="btn btn-primary btn-block">View cart</Link>
                             </div>
