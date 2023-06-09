@@ -4,7 +4,6 @@ import { Hero } from '~/components/hero/hero';
 import { ProductsCollection } from '~/components/products-collection/products-collection';
 
 export default component$(() => {
-  // TODO extract the hero code to the component
   return (
     <div>
       <Hero></Hero>

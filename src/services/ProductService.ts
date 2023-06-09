@@ -4,7 +4,6 @@ const prisma = new PrismaClient();
 
 export class ProductService {
     async getProducts(skip:number = 0,take:number = 9): Promise<(Product & {variations: ProductVariation[],categories: Category[]})[]> {
-        // TODO recieve a quantity of products to get and an offset to make a pagination
         const products = await prisma.product.findMany(
             {
                 include:{variations: true,categories: true},

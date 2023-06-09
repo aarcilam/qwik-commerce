@@ -13,7 +13,6 @@ export const Nav = component$(() => {
         if (checked) theme.value = 'night'
         if (!checked) theme.value = 'winter'
     })
-    // TODO make dropdown cart with the cart resume component
     return (
         <div class="navbar bg-base-100">
             <div class="flex-1">
