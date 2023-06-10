@@ -59,6 +59,9 @@ export const Nav = component$(() => {
                 <Link href="/shop/cart" class="btn btn-primary btn-block">
                   View cart
                 </Link>
+                <Link href="/shop/checkout" class="btn btn-primary btn-block">
+                  Make an order
+                </Link>
               </div>
             </div>
           </div>
