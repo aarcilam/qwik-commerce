@@ -7,7 +7,7 @@ import { TextInput } from "~/components/shared/forms/text-input/text-input";
 import { LoggedUsedResponseData } from "~/routes/auth/register";
 import { UserService } from "~/services/UserService";
 
-const checkoutSchema = z.object({
+const shippingsSchema = z.object({
   email: z
     .string()
     .min(1, "Please enter your email.")
@@ -42,9 +42,9 @@ const checkoutSchema = z.object({
     .min(1, "Please enter your phone."),
 });
 
-type CheckoutForm = z.infer<typeof checkoutSchema>;
+type ShippingsForm = z.infer<typeof shippingsSchema>;
 
-export const useFormLoader = routeLoader$<InitialValues<CheckoutForm>>(() => ({
+export const useFormLoader = routeLoader$<InitialValues<ShippingsForm>>(() => ({
   email: "",
   country: "",
   name: "",
@@ -57,19 +57,19 @@ export const useFormLoader = routeLoader$<InitialValues<CheckoutForm>>(() => ({
   phone: ""
 }));
 
-export const useFormAction = formAction$<CheckoutForm>(
+export const useFormAction = formAction$<ShippingsForm>(
   async (values) => {
     // Runs on server
 
   },
-  zodForm$(checkoutSchema)
+  zodForm$(shippingsSchema)
 );
 
 export default component$(() => {
-  const [checkoutForm, { Form, Field }] = useForm<CheckoutForm>({
+  const [shippingsForm, { Form, Field }] = useForm<ShippingsForm>({
     loader: useFormLoader(),
     action: useFormAction(),
-    validate: zodForm$(checkoutSchema),
+    validate: zodForm$(shippingsSchema),
   });
   return (
     <>
