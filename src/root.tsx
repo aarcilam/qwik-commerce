@@ -1,17 +1,25 @@
-import { Signal, component$, createContextId, useContextProvider, useSignal } from '@builder.io/qwik';
-import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
-import { RouterHead } from './components/router-head/router-head';
+import {
+  Signal,
+  component$,
+  createContextId,
+  useContextProvider,
+  useSignal,
+} from "@builder.io/qwik";
+import {
+  QwikCityProvider,
+  RouterOutlet,
+  ServiceWorkerRegister,
+} from "@builder.io/qwik-city";
+import { RouterHead } from "./components/router-head/router-head";
 
-import './global.css';
+import "./global.css";
 
-export const ThemeContext = createContextId<Signal>(
-  'global.theme'
-);
+export const ThemeContext = createContextId<Signal>("global.theme");
 
 export default component$(() => {
-  const theme = useSignal('winter');
+  const theme = useSignal("winter");
   useContextProvider(ThemeContext, theme);
-  
+
   return (
     <QwikCityProvider>
       <head>

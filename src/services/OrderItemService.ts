@@ -3,7 +3,9 @@ import { PrismaClient, OrderItem } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class OrderItemService {
-  async createOrderItem(orderItemData: Omit<OrderItem, "id">): Promise<OrderItem> {
+  async createOrderItem(
+    orderItemData: Omit<OrderItem, "id">
+  ): Promise<OrderItem> {
     const orderItem = await prisma.orderItem.create({
       data: orderItemData,
     });
@@ -19,7 +21,10 @@ export class OrderItemService {
     return orderItem;
   }
 
-  async updateOrderItem(orderItemId: number, orderItemData: Partial<OrderItem>): Promise<OrderItem | null> {
+  async updateOrderItem(
+    orderItemId: number,
+    orderItemData: Partial<OrderItem>
+  ): Promise<OrderItem | null> {
     const orderItem = await prisma.orderItem.update({
       where: {
         id: orderItemId,

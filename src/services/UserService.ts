@@ -1,8 +1,8 @@
 import { PrismaClient, User } from "@prisma/client";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
-import * as jwt from 'jsonwebtoken';
-const jwtsecret = 'S3CR3T0';
+import * as jwt from "jsonwebtoken";
+const jwtsecret = "S3CR3T0";
 
 export class UserService {
   async createUser(userData: Omit<User, "id">): Promise<User> {
@@ -15,12 +15,12 @@ export class UserService {
     return user;
   }
 
-  createToken(id:number,email:string){
-    const token = jwt.sign({id,email},jwtsecret);
+  createToken(id: number, email: string) {
+    const token = jwt.sign({ id, email }, jwtsecret);
     return token;
   }
 
-  async validateUser(user:User,candidatePassword:string):Promise<boolean>{
+  async validateUser(user: User, candidatePassword: string): Promise<boolean> {
     try {
       const isMatch = await bcrypt.compare(candidatePassword, user.password);
       return isMatch;
@@ -38,16 +38,19 @@ export class UserService {
     return user;
   }
 
-  async getUserByEmail(email:string): Promise<User | null> {
+  async getUserByEmail(email: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
-        email
+        email,
       },
     });
     return user;
   }
 
-  async updateUser(userId: number, userData: Partial<User>): Promise<User | null> {
+  async updateUser(
+    userId: number,
+    userData: Partial<User>
+  ): Promise<User | null> {
     const user = await prisma.user.update({
       where: {
         id: userId,

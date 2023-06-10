@@ -19,7 +19,10 @@ export class OrderService {
     return order;
   }
 
-  async updateOrder(orderId: number, orderData: Partial<Order>): Promise<Order | null> {
+  async updateOrder(
+    orderId: number,
+    orderData: Partial<Order>
+  ): Promise<Order | null> {
     const order = await prisma.order.update({
       where: {
         id: orderId,
