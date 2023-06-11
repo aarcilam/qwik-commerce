@@ -22,6 +22,14 @@ model User {
 model Order {
   id        Int              @id @default(autoincrement())
   email     String
+  country   String
+  name      String
+  address   String
+  addressComplement String
+  city  String
+  department  String
+  postalCode  String
+  phone     String
   total     Float
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt

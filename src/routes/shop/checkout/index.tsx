@@ -1,9 +1,11 @@
 import { component$, $ } from "@builder.io/qwik";
 import { routeLoader$, z, type DocumentHead, useNavigate } from "@builder.io/qwik-city";
 import { InitialValues, formAction$, zodForm$, useForm } from "@modular-forms/qwik";
+import { Order, OrderItem } from "@prisma/client";
 import { CartResume } from "~/components/cart-resume/cart-resume";
 import { ButtonInput } from "~/components/shared/forms/button-input/button-input";
 import { TextInput } from "~/components/shared/forms/text-input/text-input";
+import { OrderService } from "~/services/OrderService";
 
 
 const checkoutSchema = z.object({
@@ -55,7 +57,24 @@ export const useFormLoader = routeLoader$<InitialValues<CheckoutForm>>(() => ({
 export const useFormAction = formAction$<CheckoutForm>(
   async (values) => {
     // Runs on server
-
+    const orderService = new OrderService();
+    const orderData:Omit<Order,"id" | "createdAt" | "updatedAt" | "userId"> = {
+      email: values.email,
+      country: values.country,
+      name: values.name,
+      address: values.address,
+      addressComplement: values.addressComplement,
+      city: values.city,
+      department: values.department,
+      postalCode: values.postalCode,
+      phone: values.phone,
+      total: 0
+    };
+    const orderItems: Omit<OrderItem,"id"|"variationId"|"orderId">[] = [{
+      quantity: 0,
+      productId: 1
+    }]
+    const createdOrder = orderService.createOrder(orderData,orderItems)
   },
   zodForm$(checkoutSchema)
 );
