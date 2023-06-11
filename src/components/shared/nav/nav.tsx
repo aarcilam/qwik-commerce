@@ -50,15 +50,15 @@ export const Nav = component$(() => {
           </label>
           <div
             tabindex="0"
-            class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+            class="mt-3 card card-compact dropdown-content w-80 bg-base-100 shadow z-50"
           >
             <div class="card-body">
               <span class="font-bold text-lg">{cart.count.value} Items</span>
-              {/* <CartResume /> */}
+              <CartResume />
               <div class="card-actions">
-                <Link href="/shop/cart" class="btn btn-primary btn-block">
+                {/* <Link href="/shop/cart" class="btn btn-primary btn-block">
                   View cart
-                </Link>
+                </Link> */}
                 <Link href="/shop/checkout" class="btn btn-primary btn-block">
                   Make an order
                 </Link>

@@ -8,53 +8,16 @@ import { LoggedUsedResponseData } from "~/routes/auth/register";
 import { UserService } from "~/services/UserService";
 
 const shippingsSchema = z.object({
-  email: z
+  shippingMethod: z
     .string()
-    .min(1, "Please enter your email.")
-    .min(1, "Please enter your email.")
+    .min(1, "Please enter your shipping method.")
     .email("The email address is badly formatted."),
-  country: z
-    .string()
-    .min(1, "Please enter your country."),
-  name: z
-    .string()
-    .min(1, "Please enter your name."),
-  surname: z
-    .string()
-    .min(1, "Please enter your surname."),
-  address: z
-    .string()
-    .min(1, "Please enter your address."),
-  addressComplement: z
-    .string()
-    .min(1, "Please enter your addressComplement."),
-  city: z
-    .string()
-    .min(1, "Please enter your city."),
-  department: z
-    .string()
-    .min(1, "Please enter your department."),
-  postalCode: z
-    .string()
-    .min(1, "Please enter your postalCode."),
-  phone: z
-    .string()
-    .min(1, "Please enter your phone."),
 });
 
 type ShippingsForm = z.infer<typeof shippingsSchema>;
 
 export const useFormLoader = routeLoader$<InitialValues<ShippingsForm>>(() => ({
-  email: "",
-  country: "",
-  name: "",
-  surname: "",
-  address: "",
-  addressComplement: "",
-  city: "",
-  department: "",
-  postalCode: "",
-  phone: ""
+  shippingMethod: "",
 }));
 
 export const useFormAction = formAction$<ShippingsForm>(
@@ -75,107 +38,17 @@ export default component$(() => {
     <>
       <h1>Checkout</h1>
       <Form>
-        <Field name="email">
+        <Field name="shippingMethod">
           {(field, props) => (
             <TextInput
               props={props}
-              type="email"
+              type="shippingMethod"
               field={field}
-              placeholder="Insert a email"
+              placeholder="Insert a shippingMethod"
             />
           )}
         </Field>
-        <Field name="country">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="country"
-              field={field}
-              placeholder="Insert a country"
-            />
-          )}
-        </Field>
-        <Field name="name">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="name"
-              field={field}
-              placeholder="Insert a name"
-            />
-          )}
-        </Field>
-        <Field name="surname">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="surname"
-              field={field}
-              placeholder="Insert a surname"
-            />
-          )}
-        </Field>
-        <Field name="address">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="address"
-              field={field}
-              placeholder="Insert a address"
-            />
-          )}
-        </Field>
-        <Field name="addressComplement">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="addressComplement"
-              field={field}
-              placeholder="Insert a addressComplement"
-            />
-          )}
-        </Field>
-        <Field name="city">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="city"
-              field={field}
-              placeholder="Insert a city"
-            />
-          )}
-        </Field>
-        <Field name="department">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="department"
-              field={field}
-              placeholder="Insert a department"
-            />
-          )}
-        </Field>
-        <Field name="postalCode">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="postalCode"
-              field={field}
-              placeholder="Insert a postalCode"
-            />
-          )}
-        </Field>
-        <Field name="phone">
-          {(field, props) => (
-            <TextInput
-              props={props}
-              type="phone"
-              field={field}
-              placeholder="Insert a phone"
-            />
-          )}
-        </Field>
-        <ButtonInput value="Go to shipping" />
+        <ButtonInput value="Go to payment" />
       </Form>
     </>
   );
