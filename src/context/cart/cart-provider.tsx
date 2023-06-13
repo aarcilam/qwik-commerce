@@ -55,7 +55,7 @@ export const CartProvider = component$(() => {
     <div>
       {cart.lastAdded != null && (
         // TODO change this to a component
-        <Link href="/shop/cart" class="toast toast-top toast-end">
+        <Link href="/shop/cart" class="toast toast-top toast-end z-50 top-12">
           <div class="alert alert-success">
             <span>
               Added to cart {cart.lastAdded.quantity} -{" "}

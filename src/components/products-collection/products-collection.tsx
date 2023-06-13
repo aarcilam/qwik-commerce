@@ -21,7 +21,7 @@ export const ProductsCollection = component$<ProductsCollectionProps>(
       }
     });
     return (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-10">
         {products.value &&
           props.products == null &&
           products.value.map((product: any) => (

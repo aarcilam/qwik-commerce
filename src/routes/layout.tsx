@@ -9,7 +9,7 @@ export default component$(() => {
     <CartProvider>
       <OrderProvider>
         <Nav />
-        <div>
+        <div class=" pt-16">
           <Slot />
         </div>
         <Footer />
