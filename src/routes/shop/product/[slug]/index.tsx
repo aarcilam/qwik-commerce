@@ -7,14 +7,17 @@ export default component$(() => {
   const loc = useLocation();
   const { getProduct } = useProducts();
   const product = getProduct(+loc.params.slug);
+  
   return (
     <div>
       <Resource
         value={product}
         onPending={() => <p>Loading...</p>}
-        onResolved={(product) => (
+        onResolved={(product) => {
+          console.log(product);
+          return (
           <div>{product != null && <ProductDetail product={product} />}</div>
-        )}
+        )}}
       />
     </div>
   );
