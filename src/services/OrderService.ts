@@ -3,8 +3,10 @@ import { PrismaClient, Order, OrderItem } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class OrderService {
-  async createOrder(orderData: Omit<Order, "id" | "createdAt" | "updatedAt" | "userId">,orderItemsData: Omit<OrderItem,"id"|"variationId"|"orderId">[]): Promise<Order> {
-
+  async createOrder(
+    orderData: Omit<Order, "id" | "createdAt" | "updatedAt" | "userId">,
+    orderItemsData: Omit<OrderItem, "id" | "variationId" | "orderId">[]
+  ): Promise<Order> {
     const newOrder = await prisma.order.create({
       data: {
         ...orderData,

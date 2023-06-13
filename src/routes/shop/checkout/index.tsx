@@ -1,6 +1,19 @@
 import { component$, $, useTask$ } from "@builder.io/qwik";
-import { routeLoader$, z, type DocumentHead, useNavigate } from "@builder.io/qwik-city";
-import { InitialValues, formAction$, zodForm$, useForm, SubmitHandler, setValues, setValue } from "@modular-forms/qwik";
+import {
+  routeLoader$,
+  z,
+  type DocumentHead,
+  useNavigate,
+} from "@builder.io/qwik-city";
+import {
+  InitialValues,
+  formAction$,
+  zodForm$,
+  useForm,
+  SubmitHandler,
+  setValues,
+  setValue,
+} from "@modular-forms/qwik";
 import { Order, OrderItem } from "@prisma/client";
 import { CartResume } from "~/components/cart-resume/cart-resume";
 import { ButtonInput } from "~/components/shared/forms/button-input/button-input";
@@ -8,37 +21,20 @@ import { TextInput } from "~/components/shared/forms/text-input/text-input";
 import { useOrders } from "~/hooks/useOrder";
 import { OrderService } from "~/services/OrderService";
 
-
 const checkoutSchema = z.object({
   email: z
     .string()
     .min(1, "Please enter your email.")
     .min(1, "Please enter your email.")
     .email("The email address is badly formatted."),
-  country: z
-    .string()
-    .min(1, "Please enter your country."),
-  name: z
-    .string()
-    .min(1, "Please enter your name."),
-  address: z
-    .string()
-    .min(1, "Please enter your address."),
-  addressComplement: z
-    .string()
-    .min(1, "Please enter your addressComplement."),
-  city: z
-    .string()
-    .min(1, "Please enter your city."),
-  department: z
-    .string()
-    .min(1, "Please enter your department."),
-  postalCode: z
-    .string()
-    .min(1, "Please enter your postalCode."),
-  phone: z
-    .string()
-    .min(1, "Please enter your phone."),
+  country: z.string().min(1, "Please enter your country."),
+  name: z.string().min(1, "Please enter your name."),
+  address: z.string().min(1, "Please enter your address."),
+  addressComplement: z.string().min(1, "Please enter your addressComplement."),
+  city: z.string().min(1, "Please enter your city."),
+  department: z.string().min(1, "Please enter your department."),
+  postalCode: z.string().min(1, "Please enter your postalCode."),
+  phone: z.string().min(1, "Please enter your phone."),
 });
 
 type CheckoutForm = z.infer<typeof checkoutSchema>;
@@ -52,7 +48,7 @@ export const useFormLoader = routeLoader$<InitialValues<CheckoutForm>>(() => ({
   city: "",
   department: "",
   postalCode: "",
-  phone: ""
+  phone: "",
 }));
 
 // export const useFormAction = formAction$<CheckoutForm>(
@@ -89,17 +85,21 @@ export default component$(() => {
     validate: zodForm$(checkoutSchema),
   });
 
-  useTask$(({track})=>{
-    track(()=>order.orderData)
-    setValue(checkoutForm, 'email', order.orderData.email);
-    setValue(checkoutForm, 'country', order.orderData.country);
-    setValue(checkoutForm, 'name', order.orderData.name);
-    setValue(checkoutForm, 'address', order.orderData.address);
-    setValue(checkoutForm, 'addressComplement', order.orderData.addressComplement);
-    setValue(checkoutForm, 'city', order.orderData.city);
-    setValue(checkoutForm, 'department', order.orderData.department);
-    setValue(checkoutForm, 'postalCode', order.orderData.postalCode);
-    setValue(checkoutForm, 'phone', order.orderData.phone);
+  useTask$(({ track }) => {
+    track(() => order.orderData);
+    setValue(checkoutForm, "email", order.orderData.email);
+    setValue(checkoutForm, "country", order.orderData.country);
+    setValue(checkoutForm, "name", order.orderData.name);
+    setValue(checkoutForm, "address", order.orderData.address);
+    setValue(
+      checkoutForm,
+      "addressComplement",
+      order.orderData.addressComplement
+    );
+    setValue(checkoutForm, "city", order.orderData.city);
+    setValue(checkoutForm, "department", order.orderData.department);
+    setValue(checkoutForm, "postalCode", order.orderData.postalCode);
+    setValue(checkoutForm, "phone", order.orderData.phone);
   });
 
   const goToShipping: SubmitHandler<CheckoutForm> = $((values) => {
@@ -114,11 +114,11 @@ export default component$(() => {
         department: values.department,
         postalCode: values.postalCode,
         phone: values.phone,
-        total: 0
+        total: 0,
       });
-      nav('/shop/checkout/shippings')
+      nav("/shop/checkout/shippings");
     }
-  })
+  });
   return (
     <>
       <h1>Checkout</h1>

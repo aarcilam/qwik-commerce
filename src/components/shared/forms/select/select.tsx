@@ -5,7 +5,7 @@ export interface SelectProps {
   type?: string;
   options: string[];
   onChange$?: QRL;
-  props?: {},
+  props?: {};
   field?: FieldStore<any, any>;
 }
 
@@ -17,7 +17,9 @@ export const Select = component$<SelectProps>((props) => {
           Select a value
         </option>
         {props.options.map((option) => (
-          <option value={option} selected={props.field?.value === option}>{option}</option>
+          <option value={option} selected={props.field?.value === option}>
+            {option}
+          </option>
         ))}
       </select>
       {props.field?.error && <div>{props.field.error}</div>}

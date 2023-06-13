@@ -4,7 +4,7 @@ import { ShowPrice } from "../shared/show-price/show-price";
 import { Button } from "../shared/button/button";
 
 export const CartResume = component$(() => {
-  // TODO recieve a prop named compact that make this component compact hiding some fields of the cart or changing the order 
+  // TODO recieve a prop named compact that make this component compact hiding some fields of the cart or changing the order
   const { cart, removeFromCart, total, clearCart } = useCart();
   return (
     <div class="overflow-x-auto">
