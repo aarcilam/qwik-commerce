@@ -5,7 +5,7 @@ import { Button } from "../shared/button/button";
 
 export const CartResume = component$(() => {
   // TODO recieve a prop named compact that make this component compact hiding some fields of the cart or changing the order
-  const { cart, removeFromCart, total, clearCart } = useCart();
+  const { cart, removeFromCart, total, clearCart, count } = useCart();
   return (
     <div class="overflow-x-auto">
       <table class="table">
@@ -65,9 +65,9 @@ export const CartResume = component$(() => {
         <tfoot>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Qty</th>
-            <th>Price</th>
+            <th></th>
+            <th>Qty: {count.value}</th>
+            <th>Total: {total.value}</th>
             <th></th>
           </tr>
         </tfoot>

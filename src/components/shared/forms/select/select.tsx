@@ -12,7 +12,7 @@ export interface SelectProps {
 export const Select = component$<SelectProps>((props) => {
   return (
     <>
-      <select {...props.props} onChange$={props.onChange$}>
+      <select class="select w-full max-w-xs" {...props.props} onChange$={props.onChange$}>
         <option disabled selected>
           Select a value
         </option>
